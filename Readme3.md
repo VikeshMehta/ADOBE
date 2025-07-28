@@ -1,5 +1,3 @@
-Of course. Here is the complete, merged README file that combines both of your challenge solutions into a single, cohesive document.
-
 <br>
 
 <div align="center">
