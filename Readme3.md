@@ -60,7 +60,7 @@ The repository is organized into two main subdirectories, one for each challenge
 
 <div align="center">
 <img src="https://img.shields.io/badge/Challenge-1A%20Document%20Structure%20Intelligence-green?style=for-the-badge" alt="Challenge"/>
-<img src="https://img.shields.io/badge/Tech-PyMuPDF%20%7C%20Docker%20%7C%20Python-orange?style=for-the-badge" alt="Tech Stack"/>
+<img src="https://img.shields.io/badge/Tech-PyMuPDF%20%7C%20ML%20%7C%20Docker-orange?style=for-the-badge" alt="Tech Stack"/>
 </div>
 
 ### 📝 Intelligent PDF Outline Extraction with Advanced Pattern Recognition
@@ -75,7 +75,7 @@ The repository is organized into two main subdirectories, one for each challenge
 ### 🚀 **Core Capabilities**
 - 📊 **Smart Title Detection** - Dynamic document-aware extraction
 - 🏗️ **Hierarchical Structure** - H1/H2/H3/H4 level classification
-- 🎯 **Pattern Recognition** - Intelligent text analysis algorithms
+- 🎯 **ML-Powered Recognition** - Supervised learning for text analysis
 - 🔄 **Multi-Format Support** - Academic, Technical, Business documents
 - 🧠 **Context Understanding** - Document-type specific processing
 
@@ -93,20 +93,50 @@ The repository is organized into two main subdirectories, one for each challenge
 </tr>
 </table>
 
-#### 🏗️ Technical Architecture (1A)
+#### 🏗️ Technical Architecture & Workflow (1A)
 
+Our solution processes raw PDFs by first identifying the document's structure and then using a machine learning pipeline to classify and build a hierarchical outline.
+
+**1. High-Level Processing Flow**
+This diagram shows the overall strategy, from ingesting a PDF to producing a structured JSON output that can be used in downstream applications.
 ```mermaid
-graph TB
-    A[📄 PDF Input] --> B[🔍 Text Extractor]
-    B --> C[🧠 Pattern Analyzer]
-    C --> D[🏗️ Structure Detector]
-    D --> E[📊 Hierarchy Builder]
-    E --> F[📋 JSON Output]
-    
-    G[📐 Font Analysis] --> C
-    H[📍 Position Detection] --> C
-    I[🎨 Style Recognition] --> C
+graph TD
+    A[Raw PDF] --> B(Structure Detection)
+    B --> C{Heading Analysis}
+    C --> D[H1 Titles]
+    C --> E[H2 Sections]
+    C --> F[H3 Subsections]
+    D --> G[Structured JSON]
+    E --> G
+    F --> G
+    G --> H[Interactive Applications]
 ```
+
+**2. Detailed Machine Learning Workflow**
+The "Structure Detection" stage is powered by the following machine learning pipeline. It parses the PDF, extracts features (like font size, style, and position), and uses a classifier to identify structural elements before generating the final, validated JSON output.
+```mermaid
+flowchart LR
+    A[PDF Input] --> B[PDF Parser]
+    B --> C[Feature Extractor]
+    C --> D[ML Classifier]
+    D --> E[Structure Validator]
+    E --> F[JSON Generator]
+    F --> G[Output File]
+    
+    style A fill:#f9f,stroke:#333
+    style G fill:#bbf,stroke:#333
+```
+
+<details>
+<summary><b>🔍 Component Details</b></summary>
+
+- **📄 Text Extraction**: Advanced PyMuPDF-based text and style analysis.
+- **⚡ Feature Extraction**: Font size, weight, position, and content-based feature engineering.
+- **🤖 ML Classification**: A supervised learning model trained on 1,600+ manually labeled rows for heading identification.
+- **🏗️ Structure Detection**: Intelligent heading level classification based on model predictions.
+- **📊 Hierarchy Building**: Smart outline generation with duplicate removal and validation checks.
+
+</details>
 
 ---
 
@@ -114,7 +144,7 @@ graph TB
 
 <div align="center">
 <img src="https://img.shields.io/badge/Challenge-1B%20Persona--Driven%20Intelligence-green?style=for-the-badge" alt="Challenge"/>
-<img src="https://img.shields.io/badge/Tech-PyMuPDF%20%7C%20Docker%20%7C%20Python-orange?style=for-the-badge" alt="Tech Stack"/>
+<img src="https://img.shields.io/badge/Tech-PyMuPDF%20%7C%20TF-IDF%20%7C%20Docker-orange?style=for-the-badge" alt="Tech Stack"/>
 </div>
 
 ### 🧠 Intelligent PDF Processing System with Persona-Driven Intelligence
@@ -160,6 +190,25 @@ graph TB
     G[🎯 Job Context] --> C
 ```
 
+#### 🎭 Persona Profiles (1B)
+
+<table>
+<tr>
+<td align="center" width="33%">
+### ✈️ **Travel Planner**
+🎯 **Objective**: Plan 4-day South France trip<br>👥 **Group**: 10 college friends<br>📊 **Focus**: Itinerary, budget, attractions
+</td>
+<td align="center" width="33%">
+### 💼 **HR Professional**  
+🎯 **Objective**: Digital workflow creation<br>📋 **Focus**: Forms, compliance, automation<br>🔧 **Tools**: Adobe Acrobat mastery
+</td>
+<td align="center" width="33%">
+### 👨‍🍳 **Food Contractor**
+🎯 **Objective**: Corporate catering menus<br>🥗 **Focus**: Vegetarian options, buffets<br>🍽️ **Scope**: Professional kitchen planning
+</td>
+</tr>
+</table>
+
 ---
 
 ## 🚀 Quick Start Guide
@@ -178,8 +227,7 @@ cd Challenge_1a
 docker build -t pdf-outline-extractor .
 docker run --rm -v "$(pwd)/input:/app/input" -v "$(pwd)/output:/app/output" pdf-outline-extractor
 
-# 🎯 Windows Users can use the provided quick-start script
-# .\run_docker.bat
+# 🎯 Windows Users can use the provided quick-start script: .\run_docker.bat
 ```
 *Results will be generated in the `Challenge_1a/output/` directory.*
 
@@ -192,8 +240,7 @@ cd Challenge_1b
 docker build --platform linux/amd64 -t challenge1b-processor .
 docker run --rm challenge1b-processor
 
-# 🧪 Alternatively, use the automated test script from the root directory
-# ./build-and-test.sh 1b-test
+# 🧪 Alternatively, use the automated test script from the root directory: ./build-and-test.sh 1b-test
 ```
 *Results will be generated in each collection's directory, e.g., `Challenge_1b/Collection 1/challenge1b_output.json`.*
 
@@ -209,8 +256,8 @@ Both solutions were designed to meet and exceed the hackathon's strict performan
 
 | Metric | Specification | **Challenge 1A Status** | **Challenge 1B Status** |
 |--------|---------------|:-----------------------:|:-----------------------:|
-| ⏱️ **Execution Time** | ≤ 60 seconds | ✅ (<10s) | ✅ (15-25s) |
-| 💾 **Model Size** | ≤ 1GB (CPU-only) | ✅ (<200MB) | ✅ (<500MB) |
+| ⏱️ **Execution Time** | ≤ 60 seconds | ✅ **(<10s)** | ✅ **(15-25s)** |
+| 💾 **Model Size** | ≤ 1GB (CPU-only) | ✅ **(<200MB)** | ✅ **(<500MB)** |
 | 🖥️ **Runtime** | CPU only | ✅ | ✅ |
 | 🏗️ **Architecture** | AMD64 (linux/amd64) | ✅ | ✅ |
 | 🌐 **Network** | No internet access | ✅ | ✅ |
@@ -223,12 +270,12 @@ Both solutions were designed to meet and exceed the hackathon's strict performan
 
 Our solutions are optimized for the key scoring criteria of both challenges.
 
-### 🎯 **Challenge 1A Scoring** (100 points)
-- **High Accuracy (95%+)** in title detection.
+### 🎯 **Challenge 1A Scoring Advantages**
+- **High Accuracy (95%+)** in title detection powered by our custom-trained ML model.
 - **Hierarchical Precision (92%+)** in identifying H1-H4 levels.
 - **Robustness** across diverse document types (RFP, Technical, Forms).
 
-### 🎯 **Challenge 1B Scoring** (100 points)
+### 🎯 **Challenge 1B Scoring Advantages**
 - **Section Relevance (60 pts)**: High accuracy via TF-IDF inspired algorithms.
 - **Sub-Section Relevance (40 pts)**: Deep persona alignment and context analysis.
 - **Efficiency** in processing 31 PDFs across 3 distinct personas.
@@ -252,11 +299,11 @@ Our solutions are optimized for the key scoring criteria of both challenges.
 <td width="50%">
 
 ### 🚀 **Advanced Features**
-- 🎨 **Visual Style Analysis**: Font size, weight, and formatting detection (1A).
-- 📍 **Positional Intelligence**: Layout-aware content understanding (1A).
+- 🤖 **Supervised ML Model**: Trained on 1,600+ manually labeled data points (1A).
+- 🎨 **Visual & Positional Analysis**: Font, style, and layout intelligence (1A).
 - 🎭 **Persona-Driven Context**: Deep understanding of user roles and goals (1B).
 - 🧪 **Automated Testing**: Comprehensive scripts for validation (1B).
-- ✅ **Schema Validation**: Ensured output compliance (1B).
+- ✅ **Schema Validation**: Ensured output compliance for robust integrations (1B).
 
 </td>
 </tr>
